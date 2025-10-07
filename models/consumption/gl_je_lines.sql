@@ -1,0 +1,6 @@
+{{ config(materialized="view", unique_key="integration_id") }}
+ 
+select
+  *,
+  je_header_id || je_line_num as integration_id
+from {{ source("ebs", "gl_je_lines") }}
